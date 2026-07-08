@@ -1,0 +1,6 @@
+{
+  "name": "Pizzeria Na Włoską Nutę",
+  "description": "Strona internetowa foodtrucka z prawdziwą pizzą neapolitańską w Łomży.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

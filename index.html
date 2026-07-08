@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizzeria Na Włoską Nutę | Łomża — Prawdziwa Pizza Neapolitańska</title>
+  <link rel="icon" type="image/jpeg" href="https://i.ibb.co/cShFn3cL/494628061-122147574902468652-4691791137292453031-n.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Oswald:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --white: #fefefe;
+      --cream: #fdf8f0;
+      --red: #cc2129;
+      --red-dark: #a01820;
+      --red-light: #e84a52;
+      --red-ghost: rgba(204, 33, 41, 0.08);
+      --black: #0a0908;
+      --dark: #111008;
+      --dark-card: #1a1208;
+      --green-it: #009246;
+      --gold: #c4902a;
+      
+      --text-dark: #0a0908;
+      --text-mid: #3a2a1a;
+      --text-muted: #8a6a5a;
+      
+      --font-sans: 'Nunito', sans-serif;
+      --font-display: 'Playfair Display', serif;
+      --font-accent: 'Oswald', sans-serif;
+    }
+
+    /* Reset & Base styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--black);
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    button, .btn {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.9rem;
+      padding: 1rem 2rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* Flour Grain Texture overlay */
+    .flour-texture {
+      background-image:
+        radial-gradient(circle at 25% 25%, rgba(204,33,41,0.03) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(204,33,41,0.02) 1px, transparent 1px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+    }
+
+    /* Tricolor bars */
+    .tricolor-h {
+      display: flex;
+      width: 100%;
+      height: 6px;
+    }
+    .tricolor-h span {
+      flex: 1;
+      height: 100%;
+    }
+    .tricolor-h .t-g { background-color: var(--green-it); }
+    .tricolor-h .t-w { background-color: rgba(254,254,254,0.95); }
+    .tricolor-h .t-r { background-color: var(--red); }
+
+    .flag-strip-v {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 54px; /* 3 x 18px */
+      display: flex;
+      z-index: 2;
+    }
+    .flag-strip-v span {
+      width: 18px;
+      height: 100%;
+    }
+    .flag-strip-v .f-g { background-color: var(--green-it); }
+    .flag-strip-v .f-w { background-color: rgba(254,254,254,0.9); }
+    .flag-strip-v .f-r { background-color: var(--red); }
+    .flag-strip-left { left: 0; }
+    .flag-strip-right { 
+      right: 0; 
+      flex-direction: row-reverse; /* symmetric */
+    }
+
+    /* Thin flag badge & strips for dividers */
+    .flag-strip-v-thin {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 9px;
+      display: flex;
+      z-index: 2;
+      opacity: 0.6;
+    }
+    .flag-strip-v-thin span {
+      width: 3px;
+      height: 100%;
+    }
+    .flag-strip-v-thin .f-g { background-color: var(--green-it); }
+    .flag-strip-v-thin .f-w { background-color: rgba(254,254,254,0.7); }
+    .flag-strip-v-thin .f-r { background-color: var(--red); }
+
+    /* Layout structure */
+    section {
+      position: relative;
+      padding: 5.5rem 1.5rem;
+      overflow: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Section Headings & Headers */
+    .section-label {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text-dark);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 1.05rem;
+      margin-top: -0.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .red-rule-left {
+      width: 60px;
+      height: 2px;
+      background-color: var(--red);
+      margin-bottom: 1.5rem;
+    }
+    
+    .red-rule-center {
+      width: 80px;
+      height: 2px;
+      background-color: var(--red);
+      margin: 1.5rem auto;
+    }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navigation Bar */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(10, 9, 8, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+    
+    header.hidden-nav {
+      transform: translateY(-100%);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-link img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.05rem;
+    }
+    .logo-text span.brand-nut {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-style: normal;
+      color: var(--red);
+      font-size: 1.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-accent);
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(254, 254, 254, 0.8);
+      position: relative;
+      padding: 0.4rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* Mobile Hamburger */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 110;
+      padding: 4px;
+    }
+    
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: var(--red);
+      transition: all 0.3s ease;
+    }
+
+    /* Open state of hamburger */
+    .menu-toggle.open span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--black);
+      z-index: 105;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-style: italic;
+      color: var(--white);
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--red);
+    }
+
+    /* 1. Hero Section */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--black);
+      padding: 7rem 1.5rem 4rem 1.5rem;
+      text-align: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.ibb.co/TD29D6rq/470157702-122126517824468652-8110820136186490685-n.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(10,9,8,0.4) 0%, rgba(10,9,8,0.65) 55%, rgba(10,9,8,0.95) 100%);
+      z-index: 1;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at 50% 30%, rgba(204,33,41,0.18), transparent 55%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      z-index: 5;
+    }
+
+    .hero-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem auto;
+      filter: drop-shadow(0 0 20px rgba(204,33,41,0.5));
+    }
+
+    .hero-tricolor {
+      width: 100px;
+      height: 6px;
+      margin: 0 auto 1.5rem auto;
+      display: flex;
+    }
+
+    .hero-h1 {
+      margin-bottom: 1rem;
+    }
+    
+    .hero-h1-line1 {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(254, 254, 254, 0.75);
+      font-size: clamp(0.9rem, 2vw, 1.3rem);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .hero-h1-line2 {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--white);
+      font-size: clamp(2.3rem, 6.5vw, 5.5rem);
+      line-height: 0.95;
+      margin-top: 0.4rem;
+    }
+
+    .hero-h1-line3 {
+      display: block;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      color: var(--red);
+      font-size: clamp(2.8rem, 7.5vw, 6.5rem);
+      letter-spacing: 0.02em;
+      line-height: 0.9;
+    }
+
+    .music-note-flourish {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: rgba(204, 33, 41, 0.6);
+      font-size: 3rem;
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      color: rgba(254, 254, 254, 0.85);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.85;
+      max-width: 600px;
+      margin: 1.5rem auto 2rem auto;
+    }
+
+    .weekend-cta-strip {
+      background-color: var(--red);
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 20px rgba(204, 33, 41, 0.3);
+    }
+    
+    .weekend-cta-strip p {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      color: var(--white);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .btn-red {
+      background-color: var(--red);
+      color: var(--white);
+    }
+    .btn-red:hover {
+      background-color: var(--red-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid var(--white);
+    }
+    .btn-outline:hover {
+      background-color: var(--white);
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    .hero-socials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero-socials a {
+      color: var(--white);
+      opacity: 0.75;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-family: var(--font-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .hero-socials a:hover {
+      opacity: 1;
+      color: var(--red);
+    }
+    .hero-socials svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* 2. O nas & Foodtruck Section */
+    #o-nas {
+      background-color: var(--cream);
+      color: var(--text-dark);
+    }
+
+    .o-nas-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .o-nas-left {
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .o-nas-left .vertical-flag {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 9px;
+      display: flex;
+    }
+    .o-nas-left .vertical-flag span {
+      width: 3px;
+      height: 100%;
+    }
+
+    .o-nas-body {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      line-height: 2.1;
+      margin-bottom: 2rem;
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .feature-item {
+      border-left: 3px solid var(--red);
+      padding-left: 1.2rem;
+    }
+
+    .feature-title {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--red);
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-desc {
+      font-family: var(--font-sans);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .weekend-callout-card {
+      background-color: var(--red);
+      color: var(--white);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(204, 33, 41, 0.15);
+    }
+
+    .callout-title {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .callout-desc {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.95rem;
+    }
+
+    .o-nas-right {
+      position: relative;
+    }
+
+    .ft-photo-wrapper {
+      position: relative;
+      border: 2px solid var(--red);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(10, 9, 8, 0.15);
+    }
+
+    .ft-photo {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+    }
+
+    /* Overlapping flag badge */
+    .ft-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      display: flex;
+      width: 30px;
+      height: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      z-index: 5;
+    }
+    .ft-badge span {
+      flex: 1;
+      height: 100%;
+    }
+
+    .ft-caption {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.8rem;
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+
+    /* 3. Pizza Dnia (Special Feature) */
+    #pizza-dnia {
+      background-color: var(--red);
+      color: var(--white);
+      text-align: center;
+      padding: 6.5rem 1.5rem;
+    }
+
+    .pizza-dnia-dots {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: 1;
+    }
+
+    .music-giant-note {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.12);
+      font-size: 14rem;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .pizza-dnia-label {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .pizza-dnia-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      margin-bottom: 0.5rem;
+    }
+
+    .pizza-dnia-subtitle {
+      font-family: var(--font-accent);
+      font-weight: 500;
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 2rem;
+    }
+
+    .pizza-dnia-body {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 1.05rem;
+      line-height: 1.95;
+      max-width: 620px;
+      margin: 0 auto 2.5rem auto;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .btn-white {
+      background-color: var(--white);
+      color: var(--red);
+    }
+    .btn-white:hover {
+      background-color: var(--cream);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    }
+
+    .pizza-dnia-note {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    /* 4. Galeria */
+    #galeria {
+      background-color: var(--white);
+      color: var(--text-dark);
+      text-align: center;
+    }
+
+    /* Pizza Grid Custom Layout */
+    .pizza-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 3.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .pizza-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      cursor: pointer;
+    }
+
+    .pizza-img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      filter: saturate(1.1) contrast(1.03);
+      transition: transform 0.45s ease;
+    }
+
+    /* Grid Span Configurations */
+    @media (min-width: 768px) {
+      .pizza-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      
+      /* Row 1 */
+      .pizza-p1 {
+        grid-column: span 2;
+        height: 300px;
+      }
+      .pizza-p1 .pizza-img { height: 300px; }
+
+      .pizza-p2 { grid-column: span 1; height: 300px; }
+      .pizza-p2 .pizza-img { height: 300px; }
+
+      .pizza-p3 { grid-column: span 1; height: 300px; }
+      .pizza-p3 .pizza-img { height: 300px; }
+
+      /* Row 2 */
+      .pizza-p4 { grid-column: span 1; height: 210px; }
+      .pizza-p5 { grid-column: span 1; height: 210px; }
+      
+      .pizza-p6 {
+        grid-column: span 2;
+        height: 210px;
+      }
+      
+      /* Row 3 */
+      .pizza-p7 {
+        grid-column: span 2;
+        height: 300px;
+      }
+      .pizza-p7 .pizza-img { height: 300px; }
+
+      .pizza-p8 { grid-column: span 1; height: 300px; }
+      .pizza-p8 .pizza-img { height: 300px; }
+
+      .pizza-p9 { grid-column: span 1; height: 300px; }
+      .pizza-p9 .pizza-img { height: 300px; }
+
+      /* Row 4 */
+      .pizza-p10 {
+        grid-column: span 4;
+        height: 240px;
+      }
+      .pizza-p10 .pizza-img { height: 240px; }
+    }
+
+    /* Pizza Hover Overlay */
+    .pizza-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(10, 9, 8, 0.85) 0%, rgba(10, 9, 8, 0.4) 60%, rgba(10, 9, 8, 0.1) 100%);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding: 1.5rem;
+      text-align: left;
+      transition: opacity 0.35s ease;
+      z-index: 3;
+    }
+
+    .pizza-card:hover .pizza-overlay {
+      opacity: 1;
+    }
+
+    .pizza-card:hover .pizza-img {
+      transform: scale(1.05);
+    }
+
+    .pizza-card:hover {
+      box-shadow: 0 10px 30px rgba(204, 33, 41, 0.3);
+    }
+
+    .pizza-overlay-name {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .pizza-overlay-desc {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: rgba(254, 254, 254, 0.85);
+      line-height: 1.4;
+    }
+
+    .galeria-links {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .galeria-social-row {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .galeria-social-link {
+      color: var(--red);
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .galeria-social-link:hover {
+      color: var(--red-dark);
+      transform: translateY(-1px);
+    }
+
+    /* 5. Opinie */
+    #opinie {
+      background-color: var(--dark);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .opinie-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at 50% 80%, rgba(204,33,41,0.12), transparent 55%);
+      z-index: 1;
+    }
+
+    .opinie-dots {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 24px 24px;
+      z-index: 1;
+    }
+
+    .star-heading-row {
+      margin-bottom: 3.5rem;
+    }
+
+    .star-gold {
+      color: var(--gold);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .star-heading-claim {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--red);
+      letter-spacing: 0.05em;
+    }
+
+    .opinie-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .review-card {
+      background-color: var(--dark-card);
+      border: 1px solid rgba(204, 33, 41, 0.2);
+      border-radius: 8px;
+      padding: 2.5rem 2rem 2rem 2rem;
+      position: relative;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.35s ease;
+      overflow: hidden;
+    }
+
+    .review-card-tricolor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      display: flex;
+    }
+    .review-card-tricolor span {
+      flex: 1;
+      height: 100%;
+    }
+
+    .quote-icon {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-family: var(--font-display);
+      font-style: italic;
+      color: rgba(204, 33, 41, 0.08);
+      font-size: 7rem;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .review-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: rgba(254, 254, 254, 0.95);
+      font-size: 0.95rem;
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .review-source {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.8rem;
+    }
+
+    .review-card:hover {
+      border-color: rgba(204, 33, 41, 0.45);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(204, 33, 41, 0.15);
+    }
+
+    .btn-outline-red {
+      background: transparent;
+      color: var(--red);
+      border: 2px solid var(--red);
+    }
+    .btn-outline-red:hover {
+      background-color: var(--red);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* 6. Godziny */
+    #godziny {
+      background-color: var(--cream);
+      color: var(--text-dark);
+    }
+
+    .godziny-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .godziny-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 8px 30px rgba(204, 33, 41, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .godziny-card-tricolor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      display: flex;
+    }
+    .godziny-card-tricolor span {
+      flex: 1;
+      height: 100%;
+    }
+
+    .day-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(204, 33, 41, 0.08);
+    }
+    
+    .day-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .day-name {
+      font-family: var(--font-accent);
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+
+    .day-connector {
+      flex: 1;
+      border-bottom: 1px dotted rgba(204, 33, 41, 0.15);
+      margin: 0 10px;
+    }
+
+    .day-hours {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: rgba(10, 9, 8, 0.4);
+      font-style: italic;
+    }
+
+    .day-hours.weekend-open {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 700;
+      color: var(--red);
+      font-size: 1.1rem;
+    }
+
+    .godziny-card-callout {
+      background-color: var(--red);
+      color: var(--white);
+      padding: 0.75rem;
+      border-radius: 4px;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .godziny-card-callout p {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .godziny-philosophy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .philosophy-circle {
+      width: 210px;
+      height: 210px;
+      background: radial-gradient(circle, var(--red) 0%, var(--red-dark) 100%);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 25px rgba(204, 33, 41, 0.25);
+      margin-bottom: 2rem;
+    }
+
+    .circle-weekend {
+      font-family: var(--font-accent);
+      font-weight: 900;
+      color: var(--white);
+      font-size: 1.7rem;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+    }
+
+    .circle-pizza {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 1.45rem;
+      margin-top: 0.25rem;
+    }
+
+    .philosophy-text {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      color: var(--text-mid);
+      font-size: 1rem;
+      line-height: 1.9;
+      max-width: 420px;
+      margin-bottom: 1rem;
+    }
+
+    .philosophy-note {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--red);
+      font-size: 2rem;
+    }
+
+    /* 7. Kontakt i Lokalizacja */
+    #kontakt {
+      background-color: var(--dark);
+      color: var(--white);
+    }
+
+    .kontakt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: stretch;
+    }
+
+    .kontakt-left {
+      padding-left: 2rem;
+      position: relative;
+    }
+
+    .kontakt-left .vertical-flag {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 9px;
+      display: flex;
+    }
+    .kontakt-left .vertical-flag span {
+      width: 3px;
+      height: 100%;
+    }
+
+    .kontakt-phone {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--red);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+    .kontakt-phone:hover {
+      color: var(--red-light);
+    }
+
+    .kontakt-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .kontakt-detail-item {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 1.05rem;
+    }
+    .kontakt-detail-item a {
+      color: rgba(254, 254, 254, 0.85);
+    }
+    .kontakt-detail-item a:hover {
+      color: var(--red);
+    }
+
+    .kontakt-hours-note {
+      font-family: var(--font-accent);
+      font-weight: 500;
+      color: var(--red);
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
+    .kontakt-btns-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      max-width: 380px;
+    }
+
+    .btn-dark {
+      background-color: #1a1a1a;
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn-dark:hover {
+      background-color: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+      transform: translateX(4px);
+    }
+
+    .kontakt-right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-outer-wrapper {
+      position: relative;
+      border: 2px solid var(--red);
+      border-radius: 8px;
+      overflow: hidden;
+      height: 320px;
+      box-shadow: 0 10px 25px rgba(204, 33, 41, 0.1);
+    }
+
+    .map-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: grayscale(60%) invert(1) brightness(0.75) contrast(1.1);
+    }
+
+    .location-info-box {
+      background-color: var(--dark-card);
+      border-top: 3px solid var(--red);
+      padding: 1.2rem;
+      margin-top: 1rem;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .location-info-title {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      color: var(--white);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .location-info-desc {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.8rem;
+    }
+
+    /* 8. Footer */
+    footer {
+      background-color: #080604;
+      color: rgba(254, 254, 254, 0.5);
+      text-align: center;
+      padding: 4.5rem 1.5rem 3.5rem 1.5rem;
+      position: relative;
+    }
+
+    .footer-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.2rem auto;
+      filter: drop-shadow(0 0 10px rgba(204, 33, 41, 0.4));
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--white);
+      font-size: 1.8rem;
+      margin-bottom: 0.4rem;
+    }
+    
+    .footer-brand span {
+      color: var(--red);
+    }
+
+    .footer-sub {
+      font-family: var(--font-accent);
+      color: rgba(254, 254, 254, 0.4);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-info-text {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: rgba(254, 254, 254, 0.45);
+      margin: 1.5rem 0;
+    }
+
+    .footer-social-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-social-row a {
+      color: var(--red);
+    }
+    .footer-social-row a:hover {
+      color: var(--red-light);
+      transform: translateY(-2px);
+    }
+
+    .footer-copyright {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 0.72rem;
+      color: rgba(254, 254, 254, 0.15);
+      border-top: 1px solid rgba(204, 33, 41, 0.1);
+      padding-top: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Wave and Divider Ornaments */
+    .section-divider-tricolor {
+      height: 9px;
+      width: 100%;
+      display: flex;
+      position: relative;
+      z-index: 5;
+    }
+    .section-divider-tricolor span {
+      flex: 1;
+      height: 100%;
+    }
+    
+    .wave-divider {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+      z-index: 4;
+    }
+
+    .wave-divider svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 38px;
+      fill: var(--cream);
+    }
+
+    .wave-divider-dark {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+      z-index: 4;
+    }
+
+    .wave-divider-dark svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 38px;
+      fill: var(--dark);
+    }
+
+    /* Icon SVGs helper sizing */
+    .icon-svg {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 991px) {
+      .o-nas-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .godziny-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .kontakt-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+      .opinie-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      section {
+        padding: 4rem 1.2rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-btns {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hero-btns button, .hero-btns .btn {
+        width: 100%;
+      }
+    }
+
+    /* prefers-reduced-motion adjustment */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+        transform: none !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="flour-texture">
+
+  <!-- Header / Navigation -->
+  <header id="main-header">
+    <div class="nav-container">
+      <a href="#hero" class="logo-link">
+        <img src="https://i.ibb.co/cShFn3cL/494628061-122147574902468652-4691791137292453031-n.jpg" alt="Logo Na Włoską Nutę">
+        <span class="logo-text">Na <span class="brand-nut">Włoską Nutę</span></span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="#o-nas">O nas</a>
+        <a href="#pizza-dnia">Pizza Dnia</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#opinie">Opinie</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <button class="menu-toggle" id="menu-btn" aria-label="Otwórz menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    
+    <!-- Tricolor strip at the bottom of header -->
+    <div class="tricolor-h">
+      <span class="t-g"></span>
+      <span class="t-w"></span>
+      <span class="t-r"></span>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobile-menu-overlay">
+    <div class="flag-strip-v flag-strip-left">
+      <span class="f-g"></span>
+      <span class="f-w"></span>
+      <span class="f-r"></span>
+    </div>
+    <div class="flag-strip-v flag-strip-right">
+      <span class="f-g"></span>
+      <span class="f-w"></span>
+      <span class="f-r"></span>
+    </div>
+    
+    <a href="#o-nas" class="mobile-nav-link">O nas</a>
+    <a href="#pizza-dnia" class="mobile-nav-link">Pizza Dnia</a>
+    <a href="#galeria" class="mobile-nav-link">Galeria</a>
+    <a href="#opinie" class="mobile-nav-link">Opinie</a>
+    <a href="#kontakt" class="mobile-nav-link">Kontakt</a>
+  </div>
+
+  <main>
+    <!-- 1. HERO SECTION -->
+    <section id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-glow"></div>
+      
+      <!-- Big side tricolor borders on desktop -->
+      <div class="flag-strip-v flag-strip-left">
+        <span class="f-g"></span>
+        <span class="f-w"></span>
+        <span class="f-r"></span>
+      </div>
+      <div class="flag-strip-v flag-strip-right">
+        <span class="f-g"></span>
+        <span class="f-w"></span>
+        <span class="f-r"></span>
+      </div>
+
+      <div class="hero-content reveal">
+        <img class="hero-logo" src="https://i.ibb.co/cShFn3cL/494628061-122147574902468652-4691791137292453031-n.jpg" alt="Logo Na Włoską Nutę">
+        
+        <div class="hero-tricolor">
+          <span style="flex:1; background-color:var(--green-it);"></span>
+          <span style="flex:1; background-color:rgba(254,254,254,0.95);"></span>
+          <span style="flex:1; background-color:var(--red);"></span>
+        </div>
+
+        <h1 class="hero-h1">
+          <span class="hero-h1-line1">Pizzeria Neapolitańska</span>
+          <span class="hero-h1-line2">Na Włoską</span>
+          <span class="hero-h1-line3">NUTĘ</span>
+        </h1>
+        
+        <span class="music-note-flourish">♪♫</span>
+
+        <div class="red-rule-center"></div>
+
+        <p class="hero-tagline">
+          Foodtruck, który zawiezie Cię do słonecznej Italii — bez opuszczania Łomży!
+        </p>
+
+        <div class="weekend-cta-strip">
+          <p>Otwarte: Sobota–Niedziela 13:00–21:00</p>
+        </div>
+
+        <div class="hero-btns">
+          <a href="tel:513408100" class="btn btn-red">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            513 408 100
+          </a>
+          <a href="#galeria" class="btn btn-outline">Galeria pizzy ↓</a>
+        </div>
+
+        <div class="hero-socials">
+          <a href="https://www.facebook.com/pizzerianawloskanute/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/pizzeria_na_wloska_nute" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.tiktok.com/@pizzeria.na.wloska.nute" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            TikTok
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider (Red bar 8px + Green bar 4px) -->
+    <div class="tricolor-h" style="height: 12px;">
+      <span style="flex: 2; background-color: var(--red);"></span>
+      <span style="flex: 1; background-color: var(--green-it);"></span>
+    </div>
+
+    <!-- 2. O NAS / FOODTRUCK SECTION -->
+    <section id="o-nas">
+      <div class="container o-nas-grid">
+        
+        <!-- Left Content -->
+        <div class="o-nas-left reveal">
+          <div class="vertical-flag">
+            <span style="background-color: var(--green-it);"></span>
+            <span style="background-color: var(--white);"></span>
+            <span style="background-color: var(--red);"></span>
+          </div>
+
+          <span class="section-label">O NAS</span>
+          <div class="red-rule-left"></div>
+          <h2 class="section-title">Neapolitańska pizza z duszą.</h2>
+          
+          <div class="o-nas-body">
+            Na Włoską Nutę to foodtruck z prawdziwą pizzą neapolitańską — przygotowywaną na cienkim cieście, z autentycznym sosem pomidorowym i świeżymi składnikami. Co weekend stajemy w Łomży przy Alei Legionów 11, żeby zabrać Was prosto do słonecznej Italii. Czekamy na Was w sobotę i niedzielę!
+          </div>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <h3 class="feature-title">Prawdziwe neapolitańskie ciasto</h3>
+              <p class="feature-desc">Ręcznie wyrabiane, dojrzewające przez kilkadziesiąt godzin, chrupiące na brzegach i idealnie miękkie w środku.</p>
+            </div>
+            <div class="feature-item">
+              <h3 class="feature-title">Świeże, włoskie składniki</h3>
+              <p class="feature-desc">Oryginalna Mozzarella di Bufala, mąka Caputo, pomidory San Marzano i świeże dodatki — smak czuć w każdym kęsie.</p>
+            </div>
+            <div class="feature-item">
+              <h3 class="feature-title">Klimatyczna atmosfera plenerowa</h3>
+              <p class="feature-desc">Stoliki i leżaki na świeżym powietrzu — zajadaj się gorącą pizzą prosto z pieca w klimatycznym otoczeniu.</p>
+            </div>
+          </div>
+
+          <div class="weekend-callout-card">
+            <h4 class="callout-title">JESTEŚMY W ŁOMŻY W SOBOTĘ I NIEDZIELĘ!</h4>
+            <p class="callout-desc">13:00 – 21:00 · Aleja Legionów 11 (przy dawnym dworcu / obok parku)</p>
+          </div>
+        </div>
+
+        <!-- Right Foodtruck Photo -->
+        <div class="o-nas-right reveal">
+          <div class="ft-photo-wrapper">
+            <!-- Mini flag badge top-left of photo -->
+            <div class="ft-badge">
+              <span style="background-color: var(--green-it);"></span>
+              <span style="background-color: var(--white);"></span>
+              <span style="background-color: var(--red);"></span>
+            </div>
+            <img class="ft-photo" src="https://i.ibb.co/B5FwP32v/701343742-122188652948468652-7540740151973933573-n.jpg" alt="Pizzeria Na Włoską Nutę Food Truck" loading="lazy">
+          </div>
+          <p class="ft-caption">Nasz foodtruck — Na Włoską Nutę · Łomża</p>
+        </div>
+
+      </div>
+      
+      <!-- Wave transition to next section -->
+      <div class="wave-divider">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 3. PIZZA DNIA SECTION -->
+    <section id="pizza-dnia">
+      <div class="pizza-dnia-dots"></div>
+      
+      <!-- Slim vertical flag strips -->
+      <div class="flag-strip-v-thin flag-strip-left">
+        <span class="f-g"></span>
+        <span class="f-w"></span>
+        <span class="f-r"></span>
+      </div>
+      <div class="flag-strip-v-thin flag-strip-right">
+        <span class="f-g"></span>
+        <span class="f-w"></span>
+        <span class="f-r"></span>
+      </div>
+
+      <div class="music-giant-note">♪</div>
+
+      <div class="container reveal">
+        <span class="pizza-dnia-label">CO TYDZIEŃ NOWOŚĆ</span>
+        <h2 class="pizza-dnia-title">Pizza Dnia</h2>
+        <p class="pizza-dnia-subtitle">Nowa pizza specjalna — każdy tydzień to muzyczna niespodzianka!</p>
+        
+        <p class="pizza-dnia-body">
+          Z miłości do kulinarnych improwizacji co weekend tworzymy wyjątkową, limitowaną Pizzę Dnia. Wykorzystujemy rzadkie, sezonowe i ściśle limitowane włoskie składniki. Pizza z kurkami, leśnymi borowikami, a może kremem truflowym i figą? Śledź nasze social media i spróbuj kompozycji, która gra w naszej duszy w tym tygodniu!
+        </p>
+
+        <div class="red-rule-center" style="background-color: var(--white); opacity: 0.6;"></div>
+
+        <a href="https://www.facebook.com/pizzerianawloskanute/" target="_blank" rel="noopener" class="btn btn-white">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+          SPRAWDŹ AKTUALNĄ PIZZĘ NA FACEBOOKU →
+        </a>
+        
+        <p class="pizza-dnia-note">Dostępna tylko w sobotę i niedzielę · Do wyczerpania zapasów ciasta</p>
+      </div>
+    </section>
+
+    <!-- Section Divider (Red-to-Cream) -->
+    <div class="section-divider-tricolor" style="height: 6px;">
+      <span style="background-color: var(--green-it);"></span>
+      <span style="background-color: var(--white);"></span>
+      <span style="background-color: var(--red);"></span>
+    </div>
+
+    <!-- 4. GALERIA PIZZY SECTION -->
+    <section id="galeria" class="flour-texture">
+      <div class="container">
+        <span class="section-label">GALERIA PIZZY</span>
+        <div class="red-rule-center"></div>
+        <h2 class="section-title" style="margin-bottom: 0.5rem;">Nasze Pizze Neapolitańskie</h2>
+        <p class="section-subtitle">Wypiekane tradycyjnie w piecu, z zachowaniem surowych zasad neapolitańskiego rzemiosła.</p>
+        
+        <!-- Custom Pizza Grid -->
+        <div class="pizza-grid reveal">
+          
+          <!-- P1 -->
+          <div class="pizza-card pizza-p1">
+            <img class="pizza-img" src="https://i.ibb.co/k6Vgfdv7/680009652-122186945282468652-2764663091192268856-n.jpg" alt="Margherita D.O.C." loading="lazy">
+          </div>
+
+          <!-- P2 -->
+          <div class="pizza-card pizza-p2">
+            <img class="pizza-img" src="https://i.ibb.co/JjtLkMZ6/691721301-122188037948468652-1177046485345234848-n.jpg" alt="Diavola" loading="lazy">
+          </div>
+
+          <!-- P3 -->
+          <div class="pizza-card pizza-p3">
+            <img class="pizza-img" src="https://i.ibb.co/VWvwfvyS/697792625-122188487894468652-464887158509405877-n.jpg" alt="Capricciosa" loading="lazy">
+          </div>
+
+          <!-- P4 -->
+          <div class="pizza-card pizza-p4">
+            <img class="pizza-img" src="https://i.ibb.co/tpGFTKHR/703892543-122189106200468652-1119370273171913599-n.jpg" alt="Prosciutto e Rucola" loading="lazy">
+          </div>
+
+          <!-- P5 -->
+          <div class="pizza-card pizza-p5">
+            <img class="pizza-img" src="https://i.ibb.co/j9JRXcm5/707679132-122189631332468652-6350921400542591365-n.jpg" alt="Dolce e Piccante" loading="lazy">
+          </div>
+
+          <!-- P6 -->
+          <div class="pizza-card pizza-p6">
+            <img class="pizza-img" src="https://i.ibb.co/VcH5zHjg/717202400-122190333098468652-8149135438496187706-n.jpg" alt="Pistacchio e Mortadella" loading="lazy">
+          </div>
+
+          <!-- P7 -->
+          <div class="pizza-card pizza-p7">
+            <img class="pizza-img" src="https://i.ibb.co/0yTKZj6g/726839883-122191351682468652-2209648654557946753-n.jpg" alt="Bufala e Pesto" loading="lazy">
+          </div>
+
+          <!-- P8 -->
+          <div class="pizza-card pizza-p8">
+            <img class="pizza-img" src="https://i.ibb.co/5hjytw03/730608682-122191865894468652-7806556033198426002-n.jpg" alt="Quattro Formaggi" loading="lazy">
+          </div>
+
+          <!-- P9 -->
+          <div class="pizza-card pizza-p9">
+            <img class="pizza-img" src="https://i.ibb.co/rG82SXV3/735761368-122192176814468652-4170849868939001410-n.jpg" alt="Marinara Semplice" loading="lazy">
+          </div>
+
+          <!-- P10 -->
+          <div class="pizza-card pizza-p10">
+            <img class="pizza-img" src="https://i.ibb.co/TD29D6rq/470157702-122126517824468652-8110820136186490685-n.jpg" alt="Pizza della Casa" loading="lazy">
+          </div>
+
+        </div>
+
+        <div class="galeria-links">
+          <a href="https://www.facebook.com/pizzerianawloskanute/" target="_blank" rel="noopener" class="btn btn-red" style="font-size:0.85rem; padding: 0.9rem 2.2rem;">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+            WIĘCEJ PIZZY NA FACEBOOKU →
+          </a>
+          
+          <div class="galeria-social-row">
+            <a class="galeria-social-link" href="https://www.instagram.com/pizzeria_na_wloska_nute" target="_blank" rel="noopener">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              @pizzeria_na_wloska_nute
+            </a>
+            <a class="galeria-social-link" href="https://www.tiktok.com/@pizzeria.na.wloska.nute" target="_blank" rel="noopener">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+              @pizzeria.na.wloska.nute
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider (Red bar 6px + Green bar 3px) -->
+    <div class="tricolor-h">
+      <span style="flex: 2; background-color: var(--red);"></span>
+      <span style="flex: 1; background-color: var(--green-it);"></span>
+    </div>
+
+    <!-- 5. OPINIE SECTION -->
+    <section id="opinie">
+      <div class="opinie-glow"></div>
+      <div class="opinie-dots"></div>
+      
+      <!-- Subtly styled side flags -->
+      <div class="flag-strip-v-thin flag-strip-left" style="opacity:0.35;">
+        <span class="f-g"></span>
+        <span class="f-w"></span>
+        <span class="f-r"></span>
+      </div>
+      <div class="flag-strip-v-thin flag-strip-right" style="opacity:0.35;">
+        <span class="f-g"></span>
+        <span class="f-w"></span>
+        <span class="f-r"></span>
+      </div>
+
+      <div class="container">
+        <span class="section-label">OPINIE KLIENTÓW</span>
+        <div class="red-rule-center"></div>
+        <h2 class="section-title" style="color: var(--white);">Co mówią łomżanie</h2>
+        
+        <div class="star-heading-row">
+          <div class="star-gold">★★★★★</div>
+          <p class="star-heading-claim">„NAJLEPSZA PIZZA W ŁOMŻY!”</p>
+        </div>
+
+        <div class="opinie-cards-grid reveal">
+          
+          <!-- Card 1 -->
+          <div class="review-card">
+            <div class="review-card-tricolor">
+              <span style="background-color: var(--green-it);"></span>
+              <span style="background-color: var(--white);"></span>
+              <span style="background-color: var(--red);"></span>
+            </div>
+            <div class="quote-icon">“</div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              "Pizza jest po prostu wspaniała!!! Genialne ciasto, sos pomidorowy palce lizać — czuć pomidory!!! Świeżutkie dodatki. Będziemy wracać, bo warto. Bez wątpienia NAJLEPSZA pizza w Łomży!!!"
+            </p>
+            <span class="review-source">— Opinia z Facebooka</span>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="review-card">
+            <div class="review-card-tricolor">
+              <span style="background-color: var(--green-it);"></span>
+              <span style="background-color: var(--white);"></span>
+              <span style="background-color: var(--red);"></span>
+            </div>
+            <div class="quote-icon">“</div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              "Pizza jest the best, smaczna, świeżutkie produkty, ciasto pierwsza klasa, duże kawałki boczku — takie chrupiące, mniam! Już nie mogłam się doczekać, kiedy wyjdę z pracy i polecę Na Włoską Nutę. Warto spróbować..."
+            </p>
+            <span class="review-source">— Opinia z Google Maps</span>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="review-card">
+            <div class="review-card-tricolor">
+              <span style="background-color: var(--green-it);"></span>
+              <span style="background-color: var(--white);"></span>
+              <span style="background-color: var(--red);"></span>
+            </div>
+            <div class="quote-icon">“</div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              "Pizza przepyszna – idealnie wypieczona, a składniki świeże i dobrze dobrane. Obsługa bardzo miła, dbająca o uśmiechnięty kontakt z klientem. Bardzo polecam każdemu głodnemu włoskich smaków!"
+            </p>
+            <span class="review-source">— Opinia z Facebooka</span>
+          </div>
+
+        </div>
+
+        <a href="https://www.facebook.com/pizzerianawloskanute/reviews/" target="_blank" rel="noopener" class="btn btn-outline-red reveal" style="margin-top: 1rem;">
+          PRZECZYTAJ WIĘCEJ OPINII →
+        </a>
+      </div>
+
+      <!-- Wave to cream transition -->
+      <div class="wave-divider" style="bottom: 0; transform: rotate(180deg);">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="var(--cream)"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 6. GODZINY SECTION -->
+    <section id="godziny" class="flour-texture" style="padding-top: 6.5rem;">
+      <div class="container">
+        <span class="section-label" style="text-align: center;">GODZINY OTWARCIA</span>
+        <div class="red-rule-center"></div>
+        <h2 class="section-title" style="text-align: center; margin-bottom: 3.5rem;">Kiedy przyjeżdżamy do Łomży</h2>
+        
+        <div class="godziny-grid">
+          
+          <!-- Left: Hours Card -->
+          <div class="godziny-left reveal">
+            <div class="godziny-card">
+              <div class="godziny-card-tricolor">
+                <span style="background-color: var(--green-it);"></span>
+                <span style="background-color: var(--white);"></span>
+                <span style="background-color: var(--red);"></span>
+              </div>
+              
+              <div class="day-row">
+                <span class="day-name">Poniedziałek</span>
+                <span class="day-connector"></span>
+                <span class="day-hours" style="text-decoration: line-through;">ZAMKNIĘTE</span>
+              </div>
+              <div class="day-row">
+                <span class="day-name">Wtorek</span>
+                <span class="day-connector"></span>
+                <span class="day-hours" style="text-decoration: line-through;">ZAMKNIĘTE</span>
+              </div>
+              <div class="day-row">
+                <span class="day-name">Środa</span>
+                <span class="day-connector"></span>
+                <span class="day-hours" style="text-decoration: line-through;">ZAMKNIĘTE</span>
+              </div>
+              <div class="day-row">
+                <span class="day-name">Czwartek</span>
+                <span class="day-connector"></span>
+                <span class="day-hours" style="text-decoration: line-through;">ZAMKNIĘTE</span>
+              </div>
+              <div class="day-row">
+                <span class="day-name">Piątek</span>
+                <span class="day-connector"></span>
+                <span class="day-hours" style="text-decoration: line-through;">ZAMKNIĘTE</span>
+              </div>
+              <div class="day-row">
+                <span class="day-name">Sobota</span>
+                <span class="day-connector"></span>
+                <span class="day-hours weekend-open">13:00 – 21:00</span>
+              </div>
+              <div class="day-row">
+                <span class="day-name">Niedziela</span>
+                <span class="day-connector"></span>
+                <span class="day-hours weekend-open">13:00 – 21:00</span>
+              </div>
+
+              <div class="godziny-card-callout">
+                <p>Weekendy pełne włoskiego smaku!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Weekend Philosophy -->
+          <div class="godziny-philosophy reveal">
+            <div class="philosophy-circle">
+              <span class="circle-weekend">WEEKEND</span>
+              <span class="circle-pizza">= PIZZA</span>
+            </div>
+            
+            <p class="philosophy-text">
+              Dlaczego tylko weekendy? Bo robimy pizzę z absolutną pasją — a prawdziwa pizza wymaga czasu, odpoczynku i skupienia. Ciasto fermentuje niespiesznie, aby w sobotę i niedzielę osiągnąć absolutną doskonałość. Zupełnie jak w słonecznej Kampanii.
+            </p>
+            
+            <p class="philosophy-text" style="font-weight: 600; color: var(--red);">
+              Warto czekać cały tydzień!
+            </p>
+            
+            <span class="philosophy-note">♪♫</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="tricolor-h" style="height: 9px;">
+      <span style="background-color: var(--green-it);"></span>
+      <span style="background-color: var(--white);"></span>
+      <span style="background-color: var(--red);"></span>
+    </div>
+
+    <!-- 7. KONTAKT + LOKALIZACJA SECTION -->
+    <section id="kontakt">
+      <div class="container kontakt-grid">
+        
+        <!-- Left details -->
+        <div class="kontakt-left reveal">
+          <div class="vertical-flag">
+            <span style="background-color: var(--green-it);"></span>
+            <span style="background-color: var(--white);"></span>
+            <span style="background-color: var(--red);"></span>
+          </div>
+
+          <span class="section-label">SKONTAKTUJ SIĘ</span>
+          <div class="red-rule-left"></div>
+          <h2 class="section-title" style="color: var(--white); margin-bottom: 0.5rem;">Znajdziesz Nas w Łomży</h2>
+          <p class="section-subtitle" style="color: rgba(254,254,254,0.45); margin-bottom: 2rem;">Zadzwoń, zamów na konkretną godzinę i odbierz gorącą pizzę!</p>
+          
+          <a href="tel:513408100" class="kontakt-phone">513 408 100</a>
+          
+          <div class="kontakt-details">
+            <p class="kontakt-detail-item">
+              <strong style="color: var(--red);">Email:</strong> 
+              <a href="mailto:kontakt@pizzeria-nawloskanute.pl">kontakt@pizzeria-nawloskanute.pl</a>
+            </p>
+            <p class="kontakt-detail-item">
+              <strong style="color: var(--red);">Adres stacjonowania:</strong> 
+              Al. Legionów 11, 18-400 Łomża, Polska
+            </p>
+            <p class="kontakt-hours-note">Sb – Nd: 13:00 – 21:00</p>
+          </div>
+
+          <div class="kontakt-btns-stack">
+            <a href="https://www.facebook.com/pizzerianawloskanute/" target="_blank" rel="noopener" class="btn btn-red">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+              Facebook — Pizza Dnia
+            </a>
+            <a href="https://www.instagram.com/pizzeria_na_wloska_nute" target="_blank" rel="noopener" class="btn btn-dark">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Zaobserwuj na Instagramie
+            </a>
+            <a href="https://www.tiktok.com/@pizzeria.na.wloska.nute" target="_blank" rel="noopener" class="btn btn-dark">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+              Oglądaj na TikToku
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Map wrapper -->
+        <div class="kontakt-right reveal">
+          <div class="map-outer-wrapper">
+            <iframe 
+              class="map-iframe" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2391.801648013233!2d22.0579977!3d53.1706692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471e4da28892be35%3A0xc31639c0490f2305!2sAleja%20Legion%C3%B3w%2011%2C%2018-400%20%C5%81om%C5%BCa!5e0!3m2!1spl!2spl!4v1710000000000!5m2!1spl!2spl" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          
+          <div class="location-info-box">
+            <h4 class="location-info-title">Aleja Legionów 11, Łomża 18-400</h4>
+            <p class="location-info-desc">Nasz foodtruck stacjonuje na przestronnym placu przy Alei Legionów, obok parku. Do dyspozycji gości oddajemy wygodne miejsca siedzące na świeżym powietrzu.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="tricolor-h" style="position: absolute; top: 0; left: 0; right: 0; height: 6px;">
+      <span style="background-color: var(--green-it);"></span>
+      <span style="background-color: var(--white);"></span>
+      <span style="background-color: var(--red);"></span>
+    </div>
+
+    <img class="footer-logo" src="https://i.ibb.co/cShFn3cL/494628061-122147574902468652-4691791137292453031-n.jpg" alt="Logo Na Włoską Nutę">
+    
+    <h3 class="footer-brand">Na Włoską <span>Nutę ♪</span></h3>
+    <p class="footer-sub">Pizzeria Neapolitańska · Łomża</p>
+    
+    <div class="red-rule-center" style="background-color: var(--red); opacity: 0.3; width: 60px;"></div>
+
+    <p class="footer-info-text">
+      Aleja Legionów 11 · Telefon: 513 408 100 · kontakt@pizzeria-nawloskanute.pl
+    </p>
+
+    <div class="footer-social-row">
+      <a href="https://www.facebook.com/pizzerianawloskanute/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/pizzeria_na_wloska_nute" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@pizzeria.na.wloska.nute" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+      </a>
+    </div>
+
+    <p class="footer-copyright">
+      &copy; 2026 Pizzeria Na Włoską Nutę | Łomża — Prawdziwa pizza neapolitańska na kółkach. Wszelkie prawa zastrzeżone.
+    </p>
+  </footer>
+
+  <script>
+    // Header shadow on scroll & hide/reveal on scroll direction
+    let lastScrollTop = 0;
+    const header = document.getElementById('main-header');
+    
+    window.addEventListener('scroll', () => {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Shadow
+      if (scrollTop > 50) {
+        header.style.boxShadow = '0 10px 30px rgba(10, 9, 8, 0.25)';
+      } else {
+        header.style.boxShadow = 'none';
+      }
+      
+      // Hide / Reveal
+      if (scrollTop > lastScrollTop && scrollTop > 150) {
+        header.classList.add('hidden-nav');
+      } else {
+        header.classList.remove('hidden-nav');
+      }
+      lastScrollTop = scrollTop;
+    });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function toggleMenu() {
+      menuBtn.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+    
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('open')) {
+          toggleMenu();
+        }
+      });
+    });
+
+    // IntersectionObserver for snappy animations
+    const revealElements = document.querySelectorAll('.reveal');
+    const options = {
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    revealElements.forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
